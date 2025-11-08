@@ -1,0 +1,394 @@
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- CSS Değişkenleri (Renk Paleti) --- */
+:root {
+    --ana-renk: #007BFF; /* Canlı Mavi */
+    --ikincil-renk: #0056b3; /* Koyu Mavi */
+    --arka-plan: #f8f9fa; /* Çok Açık Gri */
+    --kart-arkaplan: #ffffff;
+    --yazi-rengi: #343a40; /* Koyu Yazı Rengi */
+    --baslik-rengi: #212529;
+    --golge: 0 10px 25px rgba(0, 0, 0, 0.07);
+    --kenar-radius: 12px;
+}
+
+/* --- Genel Sıfırlama ve Body Stili --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    background-color: var(--arka-plan);
+    color: var(--yazi-rengi);
+    /* Sayfanın aniden yüklenmesini engellemek için */
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Ana İçerik Alanı ve Animasyon --- */
+main {
+    /* Sayfa geçişlerinde soluklaşarak gelme efekti */
+    animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Header / Navigasyon (Gelişmiş) --- */
+header {
+    background: var(--kart-arkaplan);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 75px;
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--ana-renk);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.logo a:hover {
+    color: var(--ikincil-renk);
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+}
+
+header nav li {
+    margin-left: 30px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: var(--yazi-rengi);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Navigasyon linklerine alt çizgi efekti */
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--ana-renk);
+    transition: width 0.3s ease-out;
+}
+
+header nav a:hover {
+    color: var(--ana-renk);
+}
+header nav a:hover::after,
+header nav a.aktif::after { /* Aktif sayfa linki */
+    width: 100%;
+}
+
+/* Şu anda hangi sayfada olduğunu belirten stil */
+header nav a.aktif {
+    color: var(--ana-renk);
+    font-weight: 700;
+}
+
+
+/* --- Ana Sayfa Hero (Karşılama) Alanı --- */
+.hero {
+    background: linear-gradient(135deg, var(--ana-renk), var(--ikincil-renk));
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+    min-height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    animation: slideInDown 0.8s ease-out;
+}
+
+.hero p {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    animation: slideInUp 0.8s ease-out;
+}
+
+/* Animasyonlar (Yukarıdan ve Aşağıdan Gelme) */
+@keyframes slideInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Çağrı Butonu (CTA) --- */
+.cta-button {
+    display: inline-block;
+    background: var(--kart-arkaplan);
+    color: var(--ana-renk);
+    padding: 14px 30px;
+    text-decoration: none;
+    border-radius: 50px; /* Yuvarlak kenar */
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    animation: pulse 2s infinite; /* Dikkat çekici animasyon */
+}
+
+.cta-button:hover {
+    background: #e9ecef;
+    color: var(--ikincil-renk);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    animation-play-state: paused; /* Hover olunca animasyon dursun */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+
+/* --- Genel İçerik Bölümleri (Hakkımda, Projeler, İletişim) --- */
+.content-section {
+    padding: 80px 0;
+    background: var(--kart-arkaplan);
+}
+
+/* Arka planı farklılaştırmak için (zebra deseni gibi) */
+.content-section.alt-bg {
+    background: var(--arka-plan);
+}
+
+.content-section h2 {
+    font-size: 2.8rem;
+    color: var(--baslik-rengi);
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+}
+
+/* Başlıkların altına süslü çizgi */
+.content-section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--ana-renk);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* --- Proje Galerisi (Grid) --- */
+.proje-galerisi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.proje-kart {
+    background: var(--kart-arkaplan);
+    border-radius: var(--kenar-radius);
+    box-shadow: var(--golge);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.proje-kart:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.proje-kart img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover; /* Resimlerin orantılı durmasını sağlar */
+    display: block;
+}
+
+.proje-kart-icerik {
+    padding: 25px;
+    flex-grow: 1; /* Kart içeriklerinin boyunu eşitler */
+    display: flex;
+    flex-direction: column;
+}
+
+.proje-kart-icerik h3 {
+    font-size: 1.6rem;
+    color: var(--ana-renk);
+    margin-bottom: 10px;
+}
+
+.proje-kart-icerik p {
+    flex-grow: 1; /* Açıklamayı aşağı iter */
+    margin-bottom: 20px;
+}
+
+.proje-kart-icerik a {
+    display: inline-block;
+    color: var(--ikincil-renk);
+    text-decoration: none;
+    font-weight: 600;
+    align-self: flex-start; /* Linki en altta sola yaslar */
+}
+
+.proje-kart-icerik a:hover {
+    text-decoration: underline;
+}
+
+/* --- İletişim Formu --- */
+#iletisim-formu {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--kart-arkaplan);
+    padding: 40px;
+    border-radius: var(--kenar-radius);
+    box-shadow: var(--golge);
+}
+
+.form-grup {
+    margin-bottom: 25px;
+}
+
+.form-grup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--baslik-rengi);
+}
+
+.form-grup input,
+.form-grup textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-grup input:focus,
+.form-grup textarea:focus {
+    outline: none;
+    border-color: var(--ana-renk);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+#iletisim-formu button {
+    width: 100%;
+    /* .cta-button stilini tekrar kullanıyoruz */
+    padding: 15px;
+    font-size: 1.1rem;
+    border: none;
+    background: var(--ana-renk);
+    color: white;
+    cursor: pointer;
+}
+#iletisim-formu button:hover {
+    background: var(--ikincil-renk);
+    animation: none; /* Submit butonunda pulse olmasın */
+}
+
+#form-mesaji {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* --- Hakkımda Sayfası Özel Stili --- */
+.hakkimda-icerik {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.hakkimda-icerik img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%; /* Profil resmini yuvarlak yapar */
+    box-shadow: 0 10px 30px rgba(0,123,255,0.2);
+}
+.hakkimda-icerik .metin {
+    flex: 1;
+}
+.hakkimda-icerik .metin p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--baslik-rengi);
+    color: var(--arka-plan);
+    margin-top: 40px;
+}
+
+.sosyal-medya {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+.sosyal-medya a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+.sosyal-medya a:hover {
+    color: var(--ana-renk);
+}
